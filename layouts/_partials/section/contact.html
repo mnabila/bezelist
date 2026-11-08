@@ -1,0 +1,27 @@
+<section id="contact" class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="text-balance">Let's work together</h2>
+      <span class="eyebrow">{{ site.Params.sections.contact }}</span>
+    </div>
+    <p class="about-lead mb-8">
+      I'm currently open to new opportunities and collaborations. 
+      Whether you have a project in mind or just want to say hi, my inbox is always open.
+    </p>
+    
+    <div class="grid grid-cols-1 gap-20">
+      <div class="flex flex-wrap gap-4">
+        {{- with site.Params.social.email }}
+          <a class="btn btn-primary" href="{{ . }}">
+            Send an Email {{ partial "icon/arrow.html" }}
+          </a>
+        {{- end }}
+        {{- with site.Params.social.linkedin }}
+          <a class="btn" href="{{ . }}" rel="noopener" target="_blank">
+            LinkedIn {{ partial "icon/arrow.html" }}
+          </a>
+        {{- end }}
+      </div>
+    </div>
+  </div>
+</section>

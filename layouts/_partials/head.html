@@ -2,7 +2,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 {{- $title := cond .IsHome site.Title (printf "%s | %s" .Title site.Title) }}
-{{- $desc := or .Description .Summary site.Params.tagline | plainify | chomp }}
+{{- $desc := or .Description .Summary site.Params.author.tagline | plainify | chomp }}
 <title>{{ $title }}</title>
 <meta name="description" content="{{ $desc }}">
 <link rel="canonical" href="{{ .Permalink }}">
