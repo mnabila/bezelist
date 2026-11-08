@@ -8,11 +8,16 @@
 <link rel="canonical" href="{{ .Permalink }}">
 
 {{- /* Open Graph / Twitter */}}
+{{- $socialImg := or .Params.image site.Params.socialImage "og-image.jpg" }}
 <meta property="og:title" content="{{ $title }}">
 <meta property="og:description" content="{{ $desc }}">
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
 <meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:image" content="{{ $socialImg | relURL }}">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ $title }}">
+<meta name="twitter:description" content="{{ $desc }}">
+<meta name="twitter:image" content="{{ $socialImg | relURL }}">
 
 <link rel="icon" href="{{ "favicon.ico" | relURL }}">
 
@@ -24,5 +29,20 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+{{- with site.Params.analytics }}
+  {{- with .google }}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '{{ . }}');
+    </script>
+  {{- end }}
+  {{- with .cloudflare }}
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "{{ . }}"}'></script>
+  {{- end }}
+{{- end }}
 
 {{ partialCached "head/css.html" . }}

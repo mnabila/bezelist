@@ -1,8 +1,8 @@
-{{- /* Brand mark: logo.image if set (contained, no crop), else initials badge. */ -}}
-{{- with site.Params.logo.image }}
+{{- /* Brand mark: logo if set (contained, no crop), else initials badge. */ -}}
+{{- with site.Params.logo }}
   {{- $src := . | relURL }}
   {{- with or (resources.Get .) (resources.Get (strings.TrimPrefix "/" .)) }}{{ $src = .RelPermalink }}{{ end }}
   <img class="badge badge-img" src="{{ $src }}" alt="{{ site.Title }} logo" width="38" height="38">
 {{- else }}
-  <span class="badge">{{ or site.Params.logo.badge (substr site.Title 0 2 | upper) }}</span>
+  <span class="badge">{{ substr site.Title 0 2 | upper }}</span>
 {{- end }}

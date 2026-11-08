@@ -18,11 +18,12 @@ ignoreFiles = ['/bezelist/content/']
 
 [params]
   subtitle = 'Backend Engineer'
-  # Logo: custom badge initials, or set `image` to a file (e.g. in static/) instead.
-  [params.logo]
-    badge = 'AR'
-    # image = '/logo.svg'
+  # Logo: set to a file path (e.g. '/logo.svg') for an image, otherwise falls back to title acronym.
+  # logo = '/logo.svg'
   tagline = 'Reliable, scalable, maintainable backend systems, and the writing behind them.'
+  [params.analytics]
+    google = '' # G-XXXXXXXXXX
+    cloudflare = '' # yyyy
   stack = ['go', 'rust', 'typescript', 'postgresql', 'redis', 'docker']
   [params.author]
     name = 'Alex Rivera'

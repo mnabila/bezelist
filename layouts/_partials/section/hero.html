@@ -27,7 +27,7 @@
         <p class="term-out">{{ site.Params.subtitle }}</p>
         <p class="term-line"><span class="term-prompt">$</span> stack --active</p>
         <div class="term-stack">
-          {{- range (first 6 site.Params.stack) }}<span class="term-tag">{{ . }}</span>{{ end }}
+          {{- range site.Params.stack }}<span class="term-tag">{{ . }}</span>{{ end }}
         </div>
         <p class="term-line"><span class="term-prompt">$</span> <span class="term-caret"></span></p>
       </div>
