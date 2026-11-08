@@ -1,0 +1,4 @@
+{{- /* Formats a period from front matter. @example: {{ partial "period.html" .Params }} */ -}}
+{{- with .period_begin }}{{ time.Format "Jan 2006" (time.AsTime .) }}{{ end -}}
+{{- " — " -}}
+{{- if .period_finish }}{{ time.Format "Jan 2006" (time.AsTime .period_finish) }}{{ else }}Present{{ end -}}

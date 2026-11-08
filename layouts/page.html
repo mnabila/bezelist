@@ -1,10 +1,58 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
+  {{ $hasToc := gt (len .Fragments.Headings) 0 }}
+  <article class="post">
+    <section class="page-head">
+      <div class="wrap post-head">
+        <a class="link-arrow link-back" href="{{ .Parent.RelPermalink }}">{{ partial "icon/arrow-left.html" }} {{ .Parent.LinkTitle }}</a>
+        <h1>{{ .Title }}</h1>
+        <p class="meta">
+          {{ .Date | time.Format "January 2, 2006" }}
+          {{ with .ReadingTime }} &middot; {{ . }} min read{{ end }}
+          {{ with .WordCount }} &middot; {{ . }} words{{ end }}
+        </p>
+        {{ with .GetTerms "tags" }}
+          <div class="tag-row post-tags">{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}</div>
+        {{ end }}
+      </div>
+    </section>
 
-  {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
-  {{ $dateHuman := .Date | time.Format ":date_long" }}
-  <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+    <section class="section post-body">
+      <div class="wrap post-layout{{ if $hasToc }} has-toc{{ end }}">
+        {{ if $hasToc }}
+          <aside class="toc">
+            <div class="toc-inner">
+              <p class="toc-title">On this page</p>
+              {{ .TableOfContents }}
+            </div>
+          </aside>
+        {{ end }}
+        <div class="prose post-content">{{ .Content }}</div>
+      </div>
+    </section>
 
-  {{ .Content }}
-  {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+    {{ if eq .Section "project" }}
+      {{ $shots := .Resources.Match "screenshots/*" }}
+      {{ with $shots }}
+        <section class="section showcase">
+          <div class="wrap">
+            <div class="section-head"><h2>Screenshots</h2></div>
+            {{ $total := len . }}
+            <div class="shot-grid">
+              {{ range $i, $s := . }}
+                <figure class="shot">
+                  <figcaption class="shot-bar">
+                    <span class="shot-dots"><i></i><i></i><i></i></span>
+                    <span class="shot-label">preview {{ printf "%02d" (add $i 1) }} / {{ printf "%02d" $total }}</span>
+                  </figcaption>
+                  <a href="{{ $s.RelPermalink }}" target="_blank" rel="noopener">
+                    <img src="{{ $s.RelPermalink }}" alt="{{ $.Title }} screenshot {{ add $i 1 }}" width="{{ $s.Width }}" height="{{ $s.Height }}" loading="lazy" decoding="async">
+                  </a>
+                </figure>
+              {{ end }}
+            </div>
+          </div>
+        </section>
+      {{ end }}
+    {{ end }}
+  </article>
 {{ end }}

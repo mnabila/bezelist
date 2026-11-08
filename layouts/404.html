@@ -1,0 +1,15 @@
+{{ define "main" }}
+  <section class="section e404">
+    <div class="wrap">
+      <p class="eyebrow">Error 404</p>
+      <h1 class="e404-code">4<span class="z">0</span>4</h1>
+      <p class="e404-lead">This page could not be found. The link may be broken, or the page may have moved.</p>
+      <pre class="e404-term"><span class="e404-prompt">$</span> cd /page-you-wanted
+bash: cd: /page-you-wanted: No such file or directory</pre>
+      <div class="hero-actions e404-actions">
+        <a class="btn btn-primary" href="{{ "/" | relURL }}">Back home {{ partial "icon/arrow.html" }}</a>
+        <a class="btn" href="{{ "/blog" | relURL }}">Read the blog {{ partial "icon/arrow.html" }}</a>
+      </div>
+    </div>
+  </section>
+{{ end }}

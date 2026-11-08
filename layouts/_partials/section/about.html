@@ -1,0 +1,11 @@
+{{ with site.GetPage "about" }}
+  <section id="about" class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>{{ .Title }}</h2>
+        <span class="eyebrow">{{ site.Params.sections.about }}</span>
+      </div>
+      <p class="about-lead">{{ .Params.description }}</p>
+    </div>
+  </section>
+{{ end }}

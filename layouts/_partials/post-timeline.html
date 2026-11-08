@@ -1,0 +1,24 @@
+{{- /* Post timeline list. Context: a date-sorted slice of pages. */ -}}
+{{ $swatches := slice "var(--accent)" "var(--accent-lime)" "var(--accent-orange)" }}
+<ol class="timeline">
+  {{ $lastYear := "" }}
+  {{ range $i, $p := . }}
+    {{ $year := $p.Date.Format "2006" }}
+    {{ if ne $year $lastYear }}
+      <li class="tl-year"><span class="tl-year-badge">{{ $year }}</span></li>
+      {{ $lastYear = $year }}
+    {{ end }}
+    <li class="tl-item">
+      <span class="tl-node" style="background: {{ index $swatches (mod $i 3) | safeCSS }}"></span>
+      <article class="tl-card">
+        <p class="tl-date">{{ $p.Date.Format "Jan 02, 2006" }}{{ with $p.ReadingTime }} &middot; {{ . }} min read{{ end }}</p>
+        <h2 class="tl-title"><a href="{{ $p.RelPermalink }}">{{ $p.LinkTitle }}</a></h2>
+        {{ with $p.Summary }}<p class="tl-summary">{{ . | plainify | truncate 170 }}</p>{{ end }}
+        <div class="tl-foot">
+          {{ with $p.GetTerms "tags" }}<div class="tag-row">{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}</div>{{ end }}
+          <a class="link-arrow" href="{{ $p.RelPermalink }}">Read {{ partial "icon/arrow.html" }}</a>
+        </div>
+      </article>
+    </li>
+  {{ end }}
+</ol>

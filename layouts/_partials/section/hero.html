@@ -1,0 +1,40 @@
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">{{ site.Params.author.name }} &mdash; {{ site.Params.subtitle }}</p>
+      <h1>
+        {{- range $i, $line := site.Params.hero.lines }}
+          {{- if $i }}<br>{{ end }}
+          {{- if eq $line site.Params.hero.highlight }}<span class="hl">{{ $line }}</span>{{ else }}{{ $line }}{{ end }}
+        {{- end }}
+      </h1>
+      <p class="lead">{{ site.Params.tagline }}</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="{{ "/#project" | relURL }}">View projects {{ partial "icon/arrow.html" }}</a>
+        <a class="btn" href="{{ "/blog" | relURL }}">Read the blog {{ partial "icon/arrow.html" }}</a>
+      </div>
+    </div>
+
+    <div class="hero-term" aria-hidden="true">
+      <div class="hero-term-bar">
+        <span class="term-dots"><i></i><i></i><i></i></span>
+        <span class="term-path">~/mnabila</span>
+      </div>
+      <div class="hero-term-body">
+        <p class="term-line"><span class="term-prompt">$</span> whoami</p>
+        <p class="term-out">{{ site.Params.author.name }}</p>
+        <p class="term-line"><span class="term-prompt">$</span> groups</p>
+        <p class="term-out">{{ site.Params.subtitle }}</p>
+        <p class="term-line"><span class="term-prompt">$</span> stack --active</p>
+        <div class="term-stack">
+          {{- range (first 6 site.Params.stack) }}<span class="term-tag">{{ . }}</span>{{ end }}
+        </div>
+        <p class="term-line"><span class="term-prompt">$</span> <span class="term-caret"></span></p>
+      </div>
+      <div class="hero-term-foot">
+        <span class="term-chip">{{ site.Params.hero.chip }}</span>
+        <span class="term-status"><i></i> systems online</span>
+      </div>
+    </div>
+  </div>
+</section>

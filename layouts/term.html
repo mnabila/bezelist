@@ -1,7 +1,27 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
-  {{ range .Pages }}
-    <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-  {{ end }}
+  {{ $swatches := slice "var(--accent)" "var(--accent-lime)" "var(--accent-orange)" }}
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow">{{ .Data.Singular | title }} &middot; {{ len .Pages }} posts</p>
+      <h1>{{ .Title }}</h1>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      {{ if eq .Data.Plural "tags" }}
+        {{ partial "post-timeline.html" .Pages.ByDate.Reverse }}
+      {{ else }}
+        {{ range $i, $p := .Pages.ByDate.Reverse }}
+          <a class="article" href="{{ $p.RelPermalink }}">
+            <span class="swatch" style="background: {{ index $swatches (mod $i 3) | safeCSS }}"></span>
+            <span>
+              <span class="a-title">{{ $p.LinkTitle }}</span>
+              <span class="a-date">{{ $p.Date | time.Format "Jan 02, 2006" }}</span>
+            </span>
+            {{ partial "icon/arrow.html" }}
+          </a>
+        {{ end }}
+      {{ end }}
+    </div>
+  </section>
 {{ end }}

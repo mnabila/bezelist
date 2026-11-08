@@ -1,2 +1,29 @@
-<h1>{{ site.Title }}</h1>
-{{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+<div class="bg-ink text-page font-mono text-[0.74rem] font-bold tracking-[0.08em] uppercase">
+  <div class="wrap flex items-center justify-between gap-4 py-2">
+    <span>{{ site.Params.banner.text }}</span>
+    <a class="text-lime border-b-2 border-transparent hover:border-lime" href="{{ or site.Params.social.email `#` }}">{{ site.Params.banner.cta }} &rarr;</a>
+  </div>
+</div>
+
+<header class="sticky top-0 z-50 bg-surface border-b-[3px] border-ink">
+  <div class="wrap flex items-center justify-between gap-4 py-[0.85rem]">
+    <a class="inline-flex items-center gap-[0.55rem]" href="{{ "/" | relURL }}" aria-label="{{ site.Title }} home">
+      {{ partial "badge.html" . }}
+      <span class="font-display font-black text-[1.1rem] uppercase tracking-[-0.01em]">{{ site.Title }}</span>
+    </a>
+
+    {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+
+    <div class="flex items-center gap-3">
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Toggle colour theme">
+        {{ partial "icon/sun.html" }}{{ partial "icon/moon.html" }}
+      </button>
+      {{- with site.Params.social.email }}
+        <a class="btn btn-primary header-contact" href="{{ . }}">Hire me {{ partial "icon/arrow.html" }}</a>
+      {{- end }}
+      <button class="icon-btn nav-toggle" type="button" data-nav-toggle aria-label="Toggle menu" aria-expanded="false">
+        {{ partial "icon/menu.html" }}
+      </button>
+    </div>
+  </div>
+</header>

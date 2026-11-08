@@ -1,0 +1,26 @@
+{{ with site.GetPage "skill" }}
+  <section id="skill" class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Skills</h2>
+        <span class="eyebrow">{{ site.Params.sections.skill }}</span>
+      </div>
+      <div class="grid-3">
+        {{ range .Pages }}
+          <article class="card skill">
+            <h3>{{ .Title }}</h3>
+            <p class="skill-desc">{{ .Params.description }}</p>
+            {{ with .Params.languages }}
+              <h4 class="skill-label">Languages</h4>
+              <div class="tag-row">{{ range sort . }}<span class="tag">{{ . }}</span>{{ end }}</div>
+            {{ end }}
+            {{ with .Params.tools }}
+              <h4 class="skill-label">Tools</h4>
+              <div class="tag-row">{{ range sort . }}<span class="tag">{{ . }}</span>{{ end }}</div>
+            {{ end }}
+          </article>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+{{ end }}

@@ -1,0 +1,12 @@
+{
+  "name": "bezelist-theme",
+  "version": "1.0.0",
+  "description": "A professional Hugo portfolio theme",
+  "scripts": {
+    "dev": "make serve",
+    "build": "make test"
+  },
+  "devDependencies": {
+    "tailwindcss": "^4.0.0"
+  }
+}

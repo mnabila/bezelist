@@ -1,0 +1,24 @@
+{{ with site.GetPage "education" }}
+  <section id="education" class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Education</h2>
+        <span class="eyebrow">{{ site.Params.sections.education }}</span>
+      </div>
+      <div class="edu-list">
+        {{ range sort .Pages "Params.period_begin" "desc" }}
+          <article class="edu">
+            <div class="exp-when">
+              <span class="exp-period">{{ partial "period.html" .Params }}</span>
+              {{ with .Params.score }}<span class="exp-meta">GPA {{ . }}</span>{{ end }}
+            </div>
+            <div class="exp-body">
+              <h3>{{ .Title }}</h3>
+              <p class="exp-org">{{ .Params.degree }}{{ with .Params.location }} &middot; {{ . }}{{ end }}</p>
+            </div>
+          </article>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+{{ end }}

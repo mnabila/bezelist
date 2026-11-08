@@ -1,0 +1,36 @@
+{{ define "main" }}
+  <article class="post">
+    <section class="page-head">
+      <div class="wrap post-head">
+        <a class="link-arrow link-back" href="{{ "/#experience" | relURL }}">{{ partial "icon/arrow-left.html" }} Experience</a>
+        <h1>{{ .Params.role }}</h1>
+        <p class="exp-org">{{ .Title }}{{ with .Params.location }} &middot; {{ . }}{{ end }}</p>
+        <p class="meta">
+          {{ partial "period.html" .Params }}
+          {{- with .Params.workmode }} &middot; {{ . }}{{ end }}
+          {{- with .Params.worktype }} &middot; {{ . }}{{ end }}
+        </p>
+      </div>
+    </section>
+
+    <section class="section post-body">
+      <div class="wrap exp-layout{{ if .Params.technologies }} has-aside{{ end }}">
+        <div class="prose post-content">
+          {{ with .Params.tasks }}
+            <h2>What I did</h2>
+            <ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
+          {{ end }}
+          {{ .Content }}
+        </div>
+        {{ with .Params.technologies }}
+          <aside class="exp-aside">
+            <div class="toc-inner">
+              <p class="toc-title">Tech</p>
+              <div class="tag-row">{{ range . }}<span class="tag">{{ . }}</span>{{ end }}</div>
+            </div>
+          </aside>
+        {{ end }}
+      </div>
+    </section>
+  </article>
+{{ end }}

@@ -1,0 +1,31 @@
+{{ with site.GetPage "experience" }}
+  <section id="experience" class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Experience</h2>
+        <span class="eyebrow">{{ site.Params.sections.experience }}</span>
+      </div>
+      <div class="exp-list">
+        {{ range sort .Pages "Params.period_begin" "desc" }}
+          <a class="exp" href="{{ .RelPermalink }}">
+            <div class="exp-when">
+              <span class="exp-period">{{ partial "period.html" .Params }}</span>
+              <span class="exp-meta">{{ .Params.workmode }} &middot; {{ .Params.worktype }}</span>
+            </div>
+            <div class="exp-body">
+              <h3>{{ .Params.role }}</h3>
+              <p class="exp-org">{{ .Title }}{{ with .Params.location }} &middot; {{ . }}{{ end }}</p>
+              {{ with .Params.tasks }}
+                <ul class="exp-tasks">{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
+              {{ end }}
+              {{ with .Params.technologies }}
+                <div class="tag-row">{{ range . }}<span class="tag">{{ . }}</span>{{ end }}</div>
+              {{ end }}
+              <span class="exp-more">Details {{ partial "icon/arrow.html" }}</span>
+            </div>
+          </a>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+{{ end }}
