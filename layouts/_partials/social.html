@@ -1,9 +1,10 @@
 {{- /* Renders social icon links from site.Params.social. */}}
 {{- with site.Params.social }}
   <div class="flex gap-[0.6rem] mt-2">
-    {{- with .github }}<a class="social-link" href="{{ . }}" aria-label="GitHub" rel="me noopener" target="_blank">{{ partial "icon/github.html" }}</a>{{ end }}
-    {{- with .linkedin }}<a class="social-link" href="{{ . }}" aria-label="LinkedIn" rel="me noopener" target="_blank">{{ partial "icon/linkedin.html" }}</a>{{ end }}
-    {{- with .x }}<a class="social-link" href="{{ . }}" aria-label="X" rel="me noopener" target="_blank">{{ partial "icon/x.html" }}</a>{{ end }}
-    {{- with .email }}<a class="social-link" href="{{ . }}" aria-label="Email">{{ partial "icon/mail.html" }}</a>{{ end }}
+    {{ range . }}
+      <a class="social-link" href="{{ .url }}" aria-label="{{ .name | default .platform }}" rel="me noopener" target="_blank">
+        <i class="{{ .icon }}"></i>
+      </a>
+    {{ end }}
   </div>
 {{- end }}

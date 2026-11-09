@@ -21,10 +21,11 @@
     <div class="md:col-span-1">
       <h4 class="font-mono text-[0.75rem] font-bold tracking-[0.12em] uppercase mb-[0.9rem]">Elsewhere</h4>
       <ul class="list-none m-0 p-0">
-        {{- with site.Params.social.github }}<li class="mb-[0.55rem]"><a class="text-[0.95rem] border-b-2 border-transparent hover:border-accent hover:text-accent" href="{{ . }}" rel="me noopener" target="_blank">GitHub</a></li>{{ end }}
-        {{- with site.Params.social.linkedin }}<li class="mb-[0.55rem]"><a class="text-[0.95rem] border-b-2 border-transparent hover:border-accent hover:text-accent" href="{{ . }}" rel="me noopener" target="_blank">LinkedIn</a></li>{{ end }}
-        {{- with site.Params.social.x }}<li class="mb-[0.55rem]"><a class="text-[0.95rem] border-b-2 border-transparent hover:border-accent hover:text-accent" href="{{ . }}" rel="me noopener" target="_blank">X</a></li>{{ end }}
-        {{- with site.Params.social.email }}<li class="mb-[0.55rem]"><a class="text-[0.95rem] border-b-2 border-transparent hover:border-accent hover:text-accent" href="{{ . }}">Email</a></li>{{ end }}
+        {{- range site.Params.social }}
+          <li class="mb-[0.55rem]">
+            <a class="text-[0.95rem] border-b-2 border-transparent hover:border-accent hover:text-accent" href="{{ .url }}" rel="me noopener" target="_blank">{{ .name }}</a>
+          </li>
+        {{- end }}
       </ul>
     </div>
   </div>

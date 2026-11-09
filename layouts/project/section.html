@@ -21,8 +21,8 @@
               </div>
             {{ end }}
             <div class="proj-foot">
-              <a class="link-arrow" href="{{ .RelPermalink }}">Details {{ partial "icon/arrow.html" }}</a>
-              {{ with .Params.repository }}<a class="link-arrow" href="{{ . }}" rel="noopener" target="_blank">Source {{ partial "icon/arrow.html" }}</a>{{ end }}
+              <a class="link-arrow" href="{{ .RelPermalink }}">Details <i class="fa-solid fa-arrow-right"></i></a>
+              {{ with .Params.repository }}<a class="link-arrow" href="{{ . }}" rel="noopener" target="_blank">Source <i class="fa-solid fa-arrow-right"></i></a>{{ end }}
             </div>
           </article>
         {{ else }}

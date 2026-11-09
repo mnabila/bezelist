@@ -10,15 +10,15 @@
       </h1>
       <p class="lead">{{ site.Params.author.tagline }}</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="{{ "/#project" | relURL }}">View projects {{ partial "icon/arrow.html" }}</a>
-        <a class="btn" href="{{ "/blog" | relURL }}">Read the blog {{ partial "icon/arrow.html" }}</a>
+        <a class="btn btn-primary" href="{{ "/#project" | relURL }}">View projects <i class="fa-solid fa-arrow-right"></i></a>
+        <a class="btn" href="{{ "/blog" | relURL }}">Read the blog <i class="fa-solid fa-arrow-right"></i></a>
       </div>
     </div>
 
     <div class="hero-term" aria-hidden="true">
       <div class="hero-term-bar">
         <span class="term-dots"><i></i><i></i><i></i></span>
-        <span class="term-path">~/mnabila</span>
+        <span class="term-path">~/{{ site.Title | lower }}</span>
       </div>
       <div class="hero-term-body">
         <p class="term-line"><span class="term-prompt">$</span> whoami</p>

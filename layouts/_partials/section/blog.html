@@ -5,7 +5,7 @@
     <div class="wrap">
       <div class="section-head">
         <h2>{{ site.Params.sections.blog }}</h2>
-        <a class="link-arrow" href="{{ "/blog" | relURL }}">All posts {{ partial "icon/arrow.html" }}</a>
+        <a class="link-arrow" href="{{ "/blog" | relURL }}">All posts <i class="fa-solid fa-arrow-right"></i></a>
       </div>
       <ol class="timeline">
         {{ $lastYear := "" }}
@@ -23,7 +23,7 @@
               {{ with $p.Summary }}<p class="tl-summary">{{ . | plainify | truncate 170 }}</p>{{ end }}
               <div class="tl-foot">
                 {{ with $p.GetTerms "tags" }}<div class="tag-row">{{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}</div>{{ end }}
-                <a class="link-arrow" href="{{ $p.RelPermalink }}">Read {{ partial "icon/arrow.html" }}</a>
+                <a class="link-arrow" href="{{ $p.RelPermalink }}">Read <i class="fa-solid fa-arrow-right"></i></a>
               </div>
             </article>
           </li>

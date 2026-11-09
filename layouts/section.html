@@ -17,7 +17,7 @@
             <span class="a-title">{{ $p.LinkTitle }}</span>
             <span class="a-date">{{ $p.Date | time.Format "Jan 02, 2006" }}{{ with $p.GetTerms "tags" }} &middot; {{ range . }}{{ .LinkTitle }} {{ end }}{{ end }}</span>
           </span>
-          {{ partial "icon/arrow.html" }}
+          <i class="fa-solid fa-arrow-right"></i>
         </a>
       {{ else }}
         <p class="mono">No posts yet.</p>

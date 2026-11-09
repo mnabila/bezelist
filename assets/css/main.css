@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@source "hugo_stats.json";
 
 /* Map the neo-brutalism palette onto Tailwind theme tokens so utilities
    (bg-surface, text-ink, border-ink, shadow-brut, font-mono...) resolve to
@@ -124,14 +123,15 @@
 }
 
 [data-theme="dark"] {
-  --bg: #0E0E0E;
-  --surface: #171717;
-  --ink: #F2F2F2;
-  --muted: #9A9A9A;
-  --paper: #0E0E0E;
-  --on-accent: #0E0E0E;
-  --dots: rgba(242, 242, 242, 0.85);
-  --grid-dot: rgba(242, 242, 242, 0.06);
+  --bg: #121212;
+  --surface: #1E1E1E;
+  --ink: #E5E5E5;
+  --muted: #A0A0A0;
+  --paper: #121212;
+  --accent-lime: #B3D426;
+  --on-accent: #0A0A0A;
+  --dots: rgba(229, 229, 229, 0.85);
+  --grid-dot: rgba(229, 229, 229, 0.06);
 }
 
 /* ============================================================
@@ -367,7 +367,7 @@ a.card:hover,
 .hero h1 { margin-bottom: 1.1rem; text-transform: none; line-height: 0.95; }
 /* punchline gets a lime highlighter mark that wipes in */
 .hero h1 .hl {
-  color: var(--ink);
+  color: var(--on-accent);
   padding: 0 0.08em;
   background-image: linear-gradient(var(--accent-lime), var(--accent-lime));
   background-repeat: no-repeat;
@@ -802,6 +802,7 @@ a.card:hover,
     font-size: 0.8rem;
     text-transform: uppercase;
     background: var(--accent-lime);
+    color: var(--on-accent);
     padding: 0.1rem 0.4rem;
     border: 1px solid var(--ink);
     width: fit-content;

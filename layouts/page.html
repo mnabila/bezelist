@@ -3,7 +3,7 @@
   <article class="post">
     <section class="page-head">
       <div class="wrap post-head">
-        <a class="link-arrow link-back" href="{{ .Parent.RelPermalink }}">{{ partial "icon/arrow-left.html" }} {{ .Parent.LinkTitle }}</a>
+        <a class="link-arrow link-back" href="{{ .Parent.RelPermalink }}"><i class="fa-solid fa-arrow-left"></i> {{ .Parent.LinkTitle }}</a>
         <h1>{{ .Title }}</h1>
         <p class="meta">
           {{ .Date | time.Format "January 2, 2006" }}

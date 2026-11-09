@@ -16,29 +16,31 @@ theme = 'bezelist'
 # '/bezelist/exampleSite/content/', which this pattern does not match.)
 ignoreFiles = ['/bezelist/content/']
 
+[module]
+  [[module.mounts]]
+    source = 'assets'
+    target = 'assets'
+
+[build]
+  minify = false
+  [build.buildStats]
+    enable = true
+
 [params]
-  subtitle = 'Backend Engineer'
-  # Logo: set to a file path (e.g. '/logo.svg') for an image, otherwise falls back to title acronym.
-  # logo = '/logo.svg'
-  tagline = 'Reliable, scalable, maintainable backend systems, and the writing behind them.'
-  [params.analytics]
-    google = '' # G-XXXXXXXXXX
-    cloudflare = '' # yyyy
-  stack = ['go', 'rust', 'typescript', 'postgresql', 'redis', 'docker']
+  # Identity
   [params.author]
     name = 'Alex Rivera'
-  [params.social]
-    github = 'https://github.com/example'
-    linkedin = 'https://linkedin.com/in/example'
-    x = 'https://x.com/example'
-    email = 'mailto:alex@example.org'
-  [params.banner]
-    text = 'Open to backend engineering roles'
-    cta = 'Get in touch'
+    subtitle = 'Backend Engineer'
+    tagline = 'Reliable, scalable, maintainable backend systems, and the writing behind them.'
+    stack = ['go', 'rust', 'typescript', 'postgresql', 'redis', 'docker']
+
+  # Hero section
   [params.hero]
     lines = ['I build backends', 'that stay', 'boring.']
     highlight = 'boring.'
     chip = 'v2026 / shipping'
+
+  # Site-wide labels for sections
   [params.sections]
     about = 'Who I am'
     experience = 'Career'
@@ -46,23 +48,87 @@ ignoreFiles = ['/bezelist/content/']
     skill = 'What I do'
     project = 'Selected work'
     blog = 'From the blog'
+    contact = 'Get in touch'
+
+  # Branding
+  favicon = 'favicon.ico'
+
+  # Social links
+  [[params.social]]
+    name = 'GitHub'
+    url = 'https://github.com/example'
+    icon = 'fa-brands fa-github'
+
+  [[params.social]]
+    name = 'LinkedIn'
+    url = 'https://linkedin.com/in/example'
+    icon = 'fa-brands fa-linkedin'
+
+  [[params.social]]
+    name = 'X'
+    url = 'https://x.com/example'
+    icon = 'fa-brands fa-x-twitter'
+
+  [[params.social]]
+    name = 'Email'
+    url = 'mailto:alex@example.org'
+    icon = 'fa-solid fa-at'
+
+  # Call to action banner
+  [params.banner]
+    text = 'Open to backend engineering roles'
+    cta = 'Get in touch'
+
+[menus]
+  [[menus.main]]
+    name = 'Home'
+    pageRef = '/'
+    weight = 10
+  [[menus.main]]
+    name = 'Experience'
+    url = '/#experience'
+    weight = 20
+  [[menus.main]]
+    name = 'Skills'
+    url = '/#skill'
+    weight = 30
+  [[menus.main]]
+    name = 'Projects'
+    url = '/#project'
+    weight = 40
+  [[menus.main]]
+    name = 'Blog'
+    pageRef = '/blog'
+    weight = 50
+
+[outputs]
+  section = ['html', 'rss', 'json']
+
+[taxonomies]
+  tag = 'tags'
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+    lineNos = false
+    guessSyntax = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 4
+    ordered = false
 
 [security]
   allowContent = ['! ^text/html$', '! ^text/org$']
   enableInlineShortcodes = false
-
   [security.exec]
     allow = ['^(dart-)?sass$', '^go$', '^git$', '^node$', '^postcss$', '^tailwindcss$']
     osEnv = ['(?i)^((HTTPS?|NO)_PROXY|PATH(EXT)?|APPDATA|TE?MP|TERM|GO\w+|(XDG_CONFIG_)?HOME|USERPROFILE|SSH_AUTH_SOCK|DISPLAY|LANG|SYSTEMDRIVE|PROGRAMDATA)$']
-
   [security.funcs]
     getenv = ['^HUGO_', '^CI$']
-
   [security.http]
     methods = ['(?i)GET|POST']
     proxyFromEnvironment = false
     urls = ['(?i)^https?://[a-z0-9]', '! (?i)^https?://\d+\.', '! (?i)localhost', '! (?i)^https?://[^/?#]*@']
-
   [security.node]
     [security.node.permissions]
       allowAddons = ['tailwindcss']

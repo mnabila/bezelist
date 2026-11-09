@@ -11,14 +11,20 @@
     
     <div class="grid grid-cols-1 gap-20">
       <div class="flex flex-wrap gap-4">
-        {{- with site.Params.social.email }}
+        {{- $email := "" -}}
+        {{- $linkedin := "" -}}
+        {{- range site.Params.social }}
+          {{- if eq .name "Email" }}{{ $email = .url }}{{ end -}}
+          {{- if eq .name "LinkedIn" }}{{ $linkedin = .url }}{{ end -}}
+        {{- end -}}
+        {{- with $email }}
           <a class="btn btn-primary" href="{{ . }}">
-            Send an Email {{ partial "icon/arrow.html" }}
+            Send an Email <i class="fa-solid fa-arrow-right"></i>
           </a>
         {{- end }}
-        {{- with site.Params.social.linkedin }}
+        {{- with $linkedin }}
           <a class="btn" href="{{ . }}" rel="noopener" target="_blank">
-            LinkedIn {{ partial "icon/arrow.html" }}
+            LinkedIn <i class="fa-solid fa-arrow-right"></i>
           </a>
         {{- end }}
       </div>

@@ -1,0 +1,121 @@
+baseURL = 'https://example.org/'
+languageCode = 'en-us'
+title = 'Your Name'
+theme = 'bezelist'
+
+[module]
+  [[module.mounts]]
+    source = 'assets'
+    target = 'assets'
+
+[build]
+  minify = false
+  [build.buildStats]
+    enable = true
+
+[params]
+  # Identity
+  [params.author]
+    name = 'Your Name'
+    subtitle = 'Your Role'
+    tagline = 'A short description of what you do.'
+    stack = ['go', 'rust', 'typescript']
+
+  # Hero section
+  [params.hero]
+    lines = ['I build', 'great', 'things.']
+    highlight = 'great things.'
+    chip = 'v2026'
+
+  # Site-wide labels for sections
+  [params.sections]
+    about = 'About'
+    experience = 'Experience'
+    education = 'Education'
+    skill = 'Skills'
+    project = 'Projects'
+    blog = 'Blog'
+    contact = 'Contact'
+
+  # Branding
+  favicon = 'favicon.ico'
+
+  # Social links
+  [[params.social]]
+    name = 'GitHub'
+    url = 'https://github.com/username'
+    icon = 'fa-brands fa-github'
+
+  [[params.social]]
+    name = 'LinkedIn'
+    url = 'https://linkedin.com/in/username'
+    icon = 'fa-brands fa-linkedin'
+
+  [[params.social]]
+    name = 'Email'
+    url = 'mailto:email@example.org'
+    icon = 'fa-solid fa-at'
+
+  # Call to action banner
+  [params.banner]
+    text = 'Available for work'
+    cta = 'Contact me'
+
+[menus]
+  [[menus.main]]
+    name = 'Home'
+    pageRef = '/'
+    weight = 10
+  [[menus.main]]
+    name = 'Experience'
+    url = '/#experience'
+    weight = 20
+  [[menus.main]]
+    name = 'Skills'
+    url = '/#skill'
+    weight = 30
+  [[menus.main]]
+    name = 'Projects'
+    url = '/#project'
+    weight = 40
+  [[menus.main]]
+    name = 'Blog'
+    pageRef = '/blog'
+    weight = 50
+
+[outputs]
+  section = ['html', 'rss', 'json']
+
+[taxonomies]
+  tag = 'tags'
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+    lineNos = false
+    guessSyntax = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 4
+    ordered = false
+
+[security]
+  allowContent = ['! ^text/html$', '! ^text/org$']
+  enableInlineShortcodes = false
+  [security.exec]
+    allow = ['^(dart-)?sass$', '^go$', '^git$', '^node$', '^postcss$', '^tailwindcss$']
+    osEnv = ['(?i)^((HTTPS?|NO)_PROXY|PATH(EXT)?|APPDATA|TE?MP|TERM|GO\w+|(XDG_CONFIG_)?HOME|USERPROFILE|SSH_AUTH_SOCK|DISPLAY|LANG|SYSTEMDRIVE|PROGRAMDATA)$']
+  [security.funcs]
+    getenv = ['^HUGO_', '^CI$']
+  [security.http]
+    methods = ['(?i)GET|POST']
+    proxyFromEnvironment = false
+    urls = ['(?i)^https?://[a-z0-9]', '! (?i)^https?://\d+\.', '! (?i)localhost', '! (?i)^https?://[^/?#]*@']
+  [security.node]
+    [security.node.permissions]
+      allowAddons = ['tailwindcss']
+      allowChildProcess = ['tailwindcss']
+      allowRead = ['.']
+      allowWorker = ['tailwindcss']
+      allowWrite = []
+      disable = false
