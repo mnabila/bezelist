@@ -533,7 +533,7 @@ a.card:hover,
 @utility exp-meta { display: block; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-top: 0.5rem; }
 @utility exp-body { & h3 { margin-bottom: 0.2rem; } }
 @utility exp-org { font-family: var(--font-mono); font-weight: 700; font-size: 0.82rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.9rem; }
-@utility exp-tasks { margin: 0 0 1rem; padding-left: 1.1rem; & li { margin-bottom: 0.35rem; } }
+@utility exp-tasks { list-style-type: disc; margin: 0 0 1rem; padding-left: 1.1rem; & li { margin-bottom: 0.35rem; } }
 @utility exp-more {
   display: inline-flex;
   align-items: center;
@@ -546,6 +546,23 @@ a.card:hover,
   text-transform: uppercase;
   color: var(--muted);
   & .icon { width: 0.95em; height: 0.95em; transition: transform 0.12s ease; }
+}
+
+.exp-tasks-title {
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+  text-transform: none;
+  font-weight: 900;
+}
+.exp-tasks-list {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin: 0 0 2rem;
+}
+.exp-tasks-list li {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  line-height: 1.5;
 }
 
 /* ============================================================
@@ -742,33 +759,55 @@ a.card:hover,
    ============================================================ */
 .prose { max-width: 68ch; font-size: 1.15rem; line-height: 1.75; }
 .prose > p:first-of-type { font-size: 1.3rem; line-height: 1.6; }
-.prose p { margin-bottom: 1.3rem; }
+.prose p { margin-bottom: 1.75rem; }
 .prose h2 {
-  margin-top: 2.75rem;
-  margin-bottom: 0.65rem;
+  margin-top: 3.5rem;
+  margin-bottom: 1rem;
   font-size: 1.75rem;
   line-height: 1.15;
   text-transform: none;
   letter-spacing: -0.01em;
 }
 .prose h3 {
-  margin-top: 2rem;
-  margin-bottom: 0.4rem;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
   font-size: 1.3rem;
   line-height: 1.2;
   text-transform: none;
   letter-spacing: -0.005em;
 }
-.prose a { color: var(--accent); border-bottom: 2px solid var(--accent); font-weight: 600; }
-.prose ul, .prose ol { padding-left: 1.35rem; margin-bottom: 1.3rem; }
-.prose li { margin-bottom: 0.5rem; line-height: 1.7; }
+.prose a { color: var(--accent); border-bottom: 2px solid var(--accent); font-weight: 600; transition: all 0.12s ease; &:hover { background: var(--accent); color: var(--on-primary); } }
+.prose ul { list-style-type: disc; }
+.prose ol { list-style-type: decimal; }
+.prose ul, .prose ol { padding-left: 1.75rem; margin-bottom: 1.75rem; }
+.prose li { margin-bottom: 0.6rem; line-height: 1.7; }
 .prose li::marker { color: var(--accent); }
-.prose img { border: var(--border-w) solid var(--ink); box-shadow: var(--shadow); margin: 1.5rem 0; }
+.prose img { border: var(--border-w) solid var(--ink); box-shadow: var(--shadow); margin: 2rem 0; }
 .prose blockquote {
-  border-left: var(--border-w) solid var(--accent);
+  border-left: 6px solid var(--accent);
   background: var(--surface);
-  margin: 1.5rem 0;
-  padding: 0.75rem 1.25rem;
+  margin: 2rem 0;
+  padding: 1rem 1.5rem;
+  font-style: italic;
+}
+.prose .note {
+  border: var(--border-w) solid var(--ink);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  padding: 1rem;
+  margin: 2rem 0;
+  & strong {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    background: var(--accent-lime);
+    padding: 0.1rem 0.4rem;
+    border: 1px solid var(--ink);
+    width: fit-content;
+    margin-bottom: 0.75rem;
+  }
+  & p { margin-bottom: 0; }
 }
 .prose code {
   font-family: var(--font-mono);
@@ -776,13 +815,15 @@ a.card:hover,
   background: var(--surface);
   border: 2px solid var(--ink);
   padding: 0.1rem 0.35rem;
+  font-weight: 600;
 }
 .prose pre {
   border: var(--border-w) solid var(--ink);
   box-shadow: var(--shadow);
   padding: 1.1rem 1.25rem;
   overflow-x: auto;
-  margin: 1.5rem 0;
+  margin: 2rem 0;
+  background: var(--surface);
 }
 .prose pre code { background: none; border: none; padding: 0; }
 .prose table {
@@ -896,7 +937,7 @@ a.card:hover,
 /* Experience: tech stack as a sticky right-hand sidebar */
 @utility exp-layout { display: grid; gap: 2.75rem; align-items: start; }
 @utility exp-aside { position: sticky; top: 5.5rem; }
-.exp-layout.has-aside { grid-template-columns: minmax(0, 42rem) 14rem; }
+.exp-layout.has-aside { grid-template-columns: 3fr 1fr; }
 .exp-layout.has-aside .prose { max-width: none; }
 @media (max-width: 820px) {
   .exp-layout.has-aside { grid-template-columns: minmax(0, 42rem); }
@@ -905,12 +946,19 @@ a.card:hover,
 
 .post-layout.has-toc {
   display: grid;
-  grid-template-columns: 15rem minmax(0, 1fr);
+  grid-template-columns: 1fr 3fr;
   gap: 3rem;
   align-items: start;
 }
+.post-layout.has-toc .post-content {
+  margin-inline: 0;
+}
 
-@utility toc { position: sticky; top: 5.5rem; align-self: start; }
+@utility toc {
+  position: sticky;
+  top: 5.5rem;
+  align-self: start;
+}
 @utility toc-inner {
   border: var(--border-w) solid var(--ink);
   background: var(--surface);
@@ -943,8 +991,13 @@ a.card:hover,
 .prose h2, .prose h3 { scroll-margin-top: 5.5rem; }
 
 @media (max-width: 900px) {
-  .post-layout.has-toc { grid-template-columns: 1fr; gap: 1.5rem; }
-  .toc { order: -1; position: static; }
+  .post-layout.has-toc {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .toc {
+    position: static;
+  }
 }
 
 /* ============================================================
