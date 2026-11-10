@@ -8,15 +8,23 @@
       <div class="edu-list">
         {{ range sort .Pages "Params.period_begin" "desc" }}
           <article class="edu">
-            <div class="exp-when">
-              <span class="exp-period">{{ partial "period.html" .Params }}</span>
-              {{ with .Params.score }}<span class="exp-meta">GPA {{ . }}</span>{{ end }}
-            </div>
-            <div class="exp-body">
-              <h3>{{ .Title }}</h3>
-              <p class="exp-org">{{ .Params.degree }}{{ with .Params.location }} &middot; {{ . }}{{ end }}</p>
-            </div>
-          </article>
+  <div class="exp-win-head">
+    <div class="win-dots">
+      <span></span><span></span><span></span>
+    </div>
+    <div class="win-title">{{ .Title }}</div>
+  </div>
+  <div class="exp-win-body">
+    <div class="exp-when">
+      <span class="exp-period">{{ partial "period.html" .Params }}</span>
+      {{ with .Params.score }}<span class="exp-meta">GPA {{ . }}</span>{{ end }}
+    </div>
+    <div class="exp-body">
+      <h3>{{ .Params.degree }}</h3>
+      <p class="exp-org">{{ with .Params.location }}{{ . }}{{ end }}</p>
+    </div>
+  </div>
+</article>
         {{ end }}
       </div>
     </div>

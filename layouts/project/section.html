@@ -11,20 +11,7 @@
     <div class="wrap">
       <div class="grid-3">
         {{ range .Pages.ByDate.Reverse }}
-          <article class="card proj">
-            <h3 class="proj-name"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-            {{ with .Params.description }}<p class="proj-desc">{{ . }}</p>{{ end }}
-            {{ if or .Params.languages .Params.tools }}
-              <div class="tag-row">
-                {{ range sort .Params.languages }}<span class="tag">{{ . }}</span>{{ end }}
-                {{ range sort .Params.tools }}<span class="tag">{{ . }}</span>{{ end }}
-              </div>
-            {{ end }}
-            <div class="proj-foot">
-              <a class="link-arrow" href="{{ .RelPermalink }}">Details <i class="fa-solid fa-arrow-right"></i></a>
-              {{ with .Params.repository }}<a class="link-arrow" href="{{ . }}" rel="noopener" target="_blank">Source <i class="fa-solid fa-arrow-right"></i></a>{{ end }}
-            </div>
-          </article>
+          {{ partial "card/project.html" . }}
         {{ else }}
           <p class="mono">No projects yet.</p>
         {{ end }}

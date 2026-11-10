@@ -1,0 +1,18 @@
+{{/* Reusable project card. Context (.) is a project page. */}}
+<article class="card proj">
+  <div class="proj-body">
+    <h3 class="proj-name"><a class="proj-title-link" href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+    {{ with .Params.description }}<p class="proj-desc">{{ . }}</p>{{ end }}
+    {{ if or .Params.languages .Params.tools }}
+      <div class="tag-row proj-tags">
+        {{ range sort .Params.languages }}<span class="tag">{{ . }}</span>{{ end }}
+        {{ range sort .Params.tools }}<span class="tag">{{ . }}</span>{{ end }}
+      </div>
+    {{ end }}
+  </div>
+  {{ with .Params.repository }}
+    <div class="proj-footer">
+      <a class="proj-link" href="{{ . }}" rel="noopener" target="_blank">Source &rarr;</a>
+    </div>
+  {{ end }}
+</article>

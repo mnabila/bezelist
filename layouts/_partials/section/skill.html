@@ -5,19 +5,32 @@
         <h2>Skills</h2>
         <span class="eyebrow">{{ site.Params.sections.skill }}</span>
       </div>
-      <div class="grid-3">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
         {{ range .Pages }}
-          <article class="card skill">
-            <h3>{{ .Title }}</h3>
-            <p class="skill-desc">{{ .Params.description }}</p>
-            {{ with .Params.languages }}
-              <h4 class="skill-label">Languages</h4>
-              <div class="tag-row">{{ range sort . }}<span class="tag">{{ . }}</span>{{ end }}</div>
-            {{ end }}
-            {{ with .Params.tools }}
-              <h4 class="skill-label">Tools</h4>
-              <div class="tag-row">{{ range sort . }}<span class="tag">{{ . }}</span>{{ end }}</div>
-            {{ end }}
+          <article class="exp skill">
+            <div class="exp-win-head">
+              <div class="win-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="win-title">{{ .Title }}</div>
+            </div>
+            <div class="skill-win-body">
+              <div class="skill-desc">
+                {{ .Params.description }}
+              </div>
+              {{ with .Params.languages }}
+                <div class="skill-group">
+                  <h4 class="skill-label">Languages</h4>
+                  <div class="tag-row">{{ range sort . }}<span class="tag">{{ . }}</span>{{ end }}</div>
+                </div>
+              {{ end }}
+              {{ with .Params.tools }}
+                <div class="skill-group">
+                  <h4 class="skill-label">Tools</h4>
+                  <div class="tag-row">{{ range sort . }}<span class="tag">{{ . }}</span>{{ end }}</div>
+                </div>
+              {{ end }}
+            </div>
           </article>
         {{ end }}
       </div>

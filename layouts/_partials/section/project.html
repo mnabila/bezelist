@@ -6,19 +6,9 @@
         <h2>Projects</h2>
         <span class="eyebrow">{{ site.Params.sections.project }}</span>
       </div>
-      <div class="grid-3">
+<div class="grid grid-cols-1 gap-8 md:grid-cols-3">
         {{ range first 6 $pages }}
-          <article class="card proj is-link">
-            <h3 class="proj-name"><a class="proj-title-link" href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-            <p class="proj-desc">{{ .Params.description }}</p>
-            <div class="tag-row">
-              {{ range sort .Params.languages }}<span class="tag">{{ . }}</span>{{ end }}
-              {{ range sort .Params.tools }}<span class="tag">{{ . }}</span>{{ end }}
-            </div>
-            {{ with .Params.repository }}
-              <a class="link-arrow proj-link" href="{{ . }}" rel="noopener" target="_blank">Source &rarr;</a>
-            {{ end }}
-          </article>
+          {{ partial "card/project.html" . }}
         {{ end }}
       </div>
       {{ if gt (len $pages) 6 }}

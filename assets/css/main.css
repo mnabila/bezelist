@@ -289,6 +289,8 @@ main > section { border-bottom: var(--border-w) solid var(--ink); }
   box-shadow: var(--shadow);
   padding: 1.5rem;
   transition: transform 0.08s ease, box-shadow 0.08s ease;
+  break-inside: avoid;
+  display: block;
 }
 a.card:hover,
 .card.is-link:hover { transform: translate(-3px, -3px); box-shadow: var(--shadow-lg); }
@@ -497,9 +499,17 @@ a.card:hover,
 /* ============================================================
    Feature / highlight grid
    ============================================================ */
-@utility grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
-@utility grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
-@utility grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+@utility masonry-grid { 
+  columns: 3; 
+  column-gap: 1.25rem; 
+  & > * { margin-bottom: 1.25rem; }
+}
+@media (max-width: 960px) {
+  .masonry-grid { columns: 2; }
+}
+@media (max-width: 768px) {
+  .masonry-grid { columns: 1; }
+}
 
 @utility feature {
   & h3 { margin-bottom: 0.4rem; }
@@ -509,31 +519,135 @@ a.card:hover,
 /* ============================================================
    Experience
    ============================================================ */
-@utility exp-list { display: grid; gap: 1.25rem; }
-@utility exp {
+@utility exp-list {
   display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 1.5rem;
+  gap: 2rem;
+}
+@utility exp {
+  display: flex;
+  flex-direction: column;
   background: var(--surface);
   border: var(--border-w) solid var(--ink);
   box-shadow: var(--shadow);
-  padding: 1.5rem;
+  position: relative;
   transition: transform 0.08s ease, box-shadow 0.08s ease;
-  &:hover { transform: translate(-3px, -3px); box-shadow: var(--shadow-lg); }
-  &:hover .exp-more { color: var(--accent); }
-  &:hover .exp-more .icon { transform: translate(2px, -2px); }
+  text-decoration: none;
+  color: inherit;
+  &:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: var(--shadow-lg);
+  }
+}
+@utility exp-win-head {
+  background: var(--accent);
+  color: var(--on-primary);
+  border-bottom: var(--border-w) solid var(--ink);
+  padding: 0.5rem 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+@utility win-dots {
+  display: flex;
+  gap: 0.3rem;
+  & span {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    background: var(--on-primary);
+    border: 1px solid var(--ink);
+  }
+}
+@utility win-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@utility exp-win-body {
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 0.5rem;
   @media (max-width: 640px) { grid-template-columns: 1fr; gap: 1rem; }
 }
-@utility exp-when {
-  border-right: var(--border-w) solid var(--ink);
-  padding-right: 1.25rem;
-  @media (max-width: 640px) { border-right: none; border-bottom: var(--border-w) solid var(--ink); padding: 0 0 0.9rem; }
+@utility skill-win-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
-@utility exp-period { display: block; font-family: var(--font-mono); font-weight: 700; font-size: 0.82rem; letter-spacing: 0.04em; text-transform: uppercase; }
-@utility exp-meta { display: block; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-top: 0.5rem; }
-@utility exp-body { & h3 { margin-bottom: 0.2rem; } }
-@utility exp-org { font-family: var(--font-mono); font-weight: 700; font-size: 0.82rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.9rem; }
-@utility exp-tasks { list-style-type: disc; margin: 0 0 1rem; padding-left: 1.1rem; & li { margin-bottom: 0.35rem; } }
+@utility skill-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+@utility skill-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0;
+  margin-bottom: 0.25rem;
+}
+@utility skill-desc { color: var(--muted); font-size: 0.95rem; margin-bottom: 0.75rem; }
+@utility exp-when {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: right;
+  @media (max-width: 640px) { text-align: left; }
+}
+@utility exp-period {
+  display: block;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+@utility exp-meta {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
+@utility exp-body {
+  & h3 {
+    margin-bottom: 0.2rem;
+    text-transform: none;
+  }
+}
+@utility exp-org {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+@utility exp-tasks {
+  list-style-type: disc;
+  margin: 0 0 1rem;
+  padding-left: 1.1rem;
+  color: var(--muted);
+  & li {
+    margin-bottom: 0.4rem;
+    font-size: 0.95rem;
+  }
+}
 @utility exp-more {
   display: inline-flex;
   align-items: center;
@@ -541,11 +655,14 @@ a.card:hover,
   margin-top: 1rem;
   font-family: var(--font-mono);
   font-weight: 700;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
+  transition: color 0.2s ease;
   & .icon { width: 0.95em; height: 0.95em; transition: transform 0.12s ease; }
+  &:hover { color: var(--accent); }
+  &:hover .icon { transform: translate(2px, -2px); }
 }
 
 .exp-tasks-title {
@@ -575,19 +692,34 @@ a.card:hover,
    ============================================================ */
 @utility edu-list { display: grid; gap: 1rem; }
 @utility edu {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
   background: var(--surface);
   border: var(--border-w) solid var(--ink);
-  box-shadow: var(--shadow-sm);
-  padding: 1.25rem 1.5rem;
-  @media (max-width: 640px) { grid-template-columns: 1fr; gap: 1rem; }
+  box-shadow: var(--shadow);
+  position: relative;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+  &:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: var(--shadow-lg);
+  }
 }
 
 /* ============================================================
    Skills & projects cards
    ============================================================ */
+@utility skill-win-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+@utility skill-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
 @utility skill-label {
   font-family: var(--font-mono);
   font-size: 0.75rem;
@@ -595,15 +727,69 @@ a.card:hover,
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
-  margin: 1rem 0 0.5rem;
+  margin: 0;
+  margin-bottom: 0.25rem;
 }
 @utility skill-desc { color: var(--muted); font-size: 0.95rem; margin-bottom: 0.75rem; }
-@utility proj-desc { color: var(--muted); font-size: 0.95rem; margin-bottom: 0.75rem; }
-@utility proj { display: flex; flex-direction: column; position: relative; }
+@utility proj { 
+  display: flex; 
+  flex-direction: column; 
+  position: relative; 
+  border-width: 4px;
+  box-shadow: 8px 8px 0 var(--ink);
+  overflow: hidden;
+  padding: 0;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  &:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 12px 12px 0 var(--ink);
+  }
+}
+@utility proj-tags { margin-top: 1.25rem; }
+@utility proj-body {
+  padding: 1.1rem 1.25rem;
+  flex-grow: 1;
+}
+@utility proj-desc { 
+  color: var(--muted); 
+  font-size: 0.95rem; 
+  margin-bottom: 0; 
+  line-height: 1.4;}
+@utility proj-footer {
+  padding: 0.6rem 1.25rem;
+  border-top: 4px solid var(--ink);
+  display: flex;
+  justify-content: flex-end;
+  background: rgba(0,0,0,0.03);
+}
 @utility proj-title-link { &::after { content: ""; position: absolute; inset: 0; } }
-@utility proj-link { align-self: flex-start; margin-top: auto; padding-top: 1rem; position: relative; z-index: 1; }
-@utility proj-name { margin-bottom: 0.4rem; & a:hover { color: var(--accent); } }
-@utility proj-foot { display: flex; flex-wrap: wrap; gap: 1.25rem; margin-top: auto; padding-top: 1rem; }
+@utility proj-link { 
+  align-self: flex-start; 
+  margin-top: auto; 
+  padding: 0.4rem 0.8rem; 
+  background: var(--ink); 
+  color: var(--bg) !important; 
+  font-family: var(--font-mono); 
+  font-weight: 700; 
+  font-size: 0.75rem; 
+  text-transform: uppercase; 
+  border: 2px solid var(--ink); 
+  box-shadow: 2px 2px 0 var(--accent-lime);
+  transition: all 0.1s ease;
+  position: relative; 
+  z-index: 1; 
+  &:hover { 
+    transform: translate(-2px, -2px); 
+    box-shadow: 4px 4px 0 var(--accent-lime); 
+  } 
+}
+@utility proj-name {
+  margin-bottom: 0.6rem;
+  font-size: 1.5rem;
+  line-height: 1.1;
+  text-transform: uppercase;
+  & a:hover { color: var(--ink); text-decoration: underline; }
+}
 @utility section-more { margin-top: 1.75rem; }
 
 /* ============================================================
