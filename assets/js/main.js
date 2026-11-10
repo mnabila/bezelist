@@ -1,24 +1,4 @@
-// Theme toggle: persist manual choice, fall back to system preference.
 const root = document.documentElement;
-
-function setTheme(t) {
-  root.setAttribute("data-theme", t);
-  try { localStorage.setItem("theme", t); } catch (e) {}
-}
-
-document.querySelectorAll("[data-theme-toggle]").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-    setTheme(next);
-  });
-});
-
-// React to system changes only while the user has not chosen manually.
-const mq = window.matchMedia("(prefers-color-scheme: dark)");
-mq.addEventListener("change", (e) => {
-  try { if (localStorage.getItem("theme")) return; } catch (err) {}
-  root.setAttribute("data-theme", e.matches ? "dark" : "light");
-});
 
 // TOC scrollspy: highlight the heading currently in view.
 const tocLinks = document.querySelectorAll("#TableOfContents a");

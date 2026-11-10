@@ -17,9 +17,6 @@
     {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
 
     <div class="flex items-center gap-3">
-      <button class="icon-btn" type="button" data-theme-toggle aria-label="Toggle colour theme">
-        <i class="fa-solid fa-sun icon icon-sun"></i><i class="fa-solid fa-moon icon icon-moon"></i>
-      </button>
       {{- $email := "" -}}
       {{- range site.Params.social }}{{ if eq .name "Email" }}{{ $email = .url }}{{ end }}{{ end -}}
       {{- with $email }}

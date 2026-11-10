@@ -2,7 +2,7 @@
 
 /* Map the neo-brutalism palette onto Tailwind theme tokens so utilities
    (bg-surface, text-ink, border-ink, shadow-brut, font-mono...) resolve to
-   the CSS variables below and auto-adapt under [data-theme="dark"]. */
+   the CSS variables below. */
 @theme {
   --font-display: "Archivo", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
@@ -21,9 +21,6 @@
   --shadow-brut: var(--shadow);
   --shadow-brut-lg: var(--shadow-lg);
 }
-
-/* Toggle class strategy: theme switches via [data-theme="dark"] on <html>. */
-@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 /* Preflight is intentionally not imported (the base below already resets);
    give border utilities a solid style so border-[3px]/border-ink render. */
@@ -64,9 +61,6 @@
   &:hover { transform: translate(-2px, -2px); box-shadow: var(--shadow); }
   & .icon { width: 1.25rem; height: 1.25rem; }
 }
-.icon-btn .icon-moon { display: none; }
-[data-theme="dark"] .icon-btn .icon-sun { display: none; }
-[data-theme="dark"] .icon-btn .icon-moon { display: block; }
 
 /* Primary nav: desktop inline row + JS-toggled mobile drawer (data-nav .open). */
 .site-nav ul { display: flex; gap: 1.4rem; list-style: none; margin: 0; padding: 0; }
@@ -75,7 +69,7 @@
   letter-spacing: 0.08em; text-transform: uppercase;
   padding-bottom: 3px; border-bottom: 2px solid transparent;
 }
-.site-nav a:hover, .site-nav a.active { border-color: var(--accent); color: var(--accent); }
+.site-nav a:hover, .site-nav a.active { border-color: var(--accent); color: var(--ink); }
 .nav-toggle { display: none; }
 @media (max-width: 840px) {
   .header-contact { display: none; }
@@ -96,17 +90,25 @@
    Design tokens - stabilo neo-brutalism (see TDD.md 3.4)
    ============================================================ */
 :root {
-  --bg: #F3F1E9;
-  --surface: #FFFFFF;
+  --bg: #F4F1E8;            /* stabilo alt background */
+  --surface: #FFFDF5;       /* stabilo paper */
   --ink: #000000;
   --muted: #5C5C5C;
-  --paper: #F3F1E9;
+  --paper: #FFFDF5;
 
-  --accent: #6C47FF;        /* primary violet */
-  --accent-lime: #C6F032;
-  --accent-orange: #FF6B1A;
-  --on-primary: #F3F1E9;    /* text on violet */
-  --on-accent: #000000;     /* text on lime / orange */
+  /* stabilo highlighter palette */
+  --hl-yellow: #FFF000;
+  --hl-pink:   #FF3EA5;
+  --hl-green:  #B6FF00;
+  --hl-cyan:   #00E5FF;
+  --hl-orange: #FF9500;
+  --hl-purple: #B388FF;
+
+  --accent: var(--hl-purple);      /* primary */
+  --accent-lime: var(--hl-green);
+  --accent-orange: var(--hl-orange);
+  --on-primary: #000000;    /* text on highlighter fills */
+  --on-accent: #000000;
 
   --border-w: 3px;
   --shadow: 6px 6px 0 var(--ink);
@@ -122,17 +124,6 @@
   --wrap: 1320px;
 }
 
-[data-theme="dark"] {
-  --bg: #121212;
-  --surface: #1E1E1E;
-  --ink: #E5E5E5;
-  --muted: #A0A0A0;
-  --paper: #121212;
-  --accent-lime: #B3D426;
-  --on-accent: #0A0A0A;
-  --dots: rgba(229, 229, 229, 0.85);
-  --grid-dot: rgba(229, 229, 229, 0.06);
-}
 
 /* ============================================================
    Base
@@ -248,7 +239,7 @@ main > section { border-bottom: var(--border-w) solid var(--ink); }
   border-bottom: 2px solid var(--ink);
   padding-bottom: 2px;
   & .icon { width: 0.95em; height: 0.95em; transition: transform 0.12s ease; }
-  &:hover { color: var(--accent); border-color: var(--accent); }
+  &:hover { color: var(--ink); border-color: var(--accent); }
   &:hover .icon { transform: translate(2px, -2px); }
 }
 .link-back:hover .icon { transform: translateX(-3px); }
@@ -635,7 +626,7 @@ a.card:hover,
   font-size: 0.85rem;
   letter-spacing: 0.02em;
   text-transform: none;
-  color: var(--accent);
+  color: var(--ink);
   margin-bottom: 1rem;
 }
 @utility exp-tasks {
@@ -661,7 +652,7 @@ a.card:hover,
   color: var(--muted);
   transition: color 0.2s ease;
   & .icon { width: 0.95em; height: 0.95em; transition: transform 0.12s ease; }
-  &:hover { color: var(--accent); }
+  &:hover { color: var(--ink); }
   &:hover .icon { transform: translate(2px, -2px); }
 }
 
@@ -919,8 +910,8 @@ a.card:hover,
     margin-top: 0.4rem;
   }
   & .icon { width: 1.3rem; height: 1.3rem; color: var(--muted); }
-  &:hover .a-title { color: var(--accent); }
-  &:hover .icon { color: var(--accent); }
+  &:hover .a-title { color: var(--ink); text-decoration: underline; }
+  &:hover .icon { color: var(--ink); }
 }
 
 /* ============================================================
@@ -962,12 +953,12 @@ a.card:hover,
   text-transform: none;
   letter-spacing: -0.005em;
 }
-.prose a { color: var(--accent); border-bottom: 2px solid var(--accent); font-weight: 600; transition: all 0.12s ease; &:hover { background: var(--accent); color: var(--on-primary); } }
+.prose a { color: var(--ink); border-bottom: 2px solid var(--accent); font-weight: 600; transition: all 0.12s ease; &:hover { background: var(--accent); color: var(--on-primary); } }
 .prose ul { list-style-type: disc; }
 .prose ol { list-style-type: decimal; }
 .prose ul, .prose ol { padding-left: 1.75rem; margin-bottom: 1.75rem; }
 .prose li { margin-bottom: 0.6rem; line-height: 1.7; }
-.prose li::marker { color: var(--accent); }
+.prose li::marker { color: var(--ink); }
 .prose img { border: var(--border-w) solid var(--ink); box-shadow: var(--shadow); margin: 2rem 0; }
 .prose blockquote {
   border-left: 6px solid var(--accent);
@@ -1084,7 +1075,7 @@ a.card:hover,
   &:hover { transform: translate(-3px, -3px); box-shadow: var(--shadow-lg); }
 }
 @utility tl-date { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.4rem; }
-@utility tl-title { font-size: 1.3rem; line-height: 1.2; text-transform: none; margin: 0 0 0.5rem; & a:hover { color: var(--accent); } }
+@utility tl-title { font-size: 1.3rem; line-height: 1.2; text-transform: none; margin: 0 0 0.5rem; & a:hover { color: var(--ink); text-decoration: underline; } }
 @utility tl-summary { color: var(--muted); font-size: 0.98rem; margin: 0 0 1.1rem; }
 @utility tl-foot {
   display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
@@ -1173,7 +1164,7 @@ a.card:hover,
   padding: 0.12rem 0 0.12rem 0.55rem;
 }
 #TableOfContents a:hover,
-#TableOfContents a.active { color: var(--accent); border-color: var(--accent); font-weight: 600; }
+#TableOfContents a.active { color: var(--ink); border-color: var(--accent); font-weight: 600; }
 
 .prose h2, .prose h3 { scroll-margin-top: 5.5rem; }
 
