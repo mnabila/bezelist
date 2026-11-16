@@ -1003,6 +1003,7 @@ a.card:hover,
   background: var(--surface);
 }
 .prose pre code { background: none; border: none; padding: 0; }
+.prose pre.mermaid { text-align: center; }
 .prose table {
   width: 100%;
   border-collapse: collapse;
